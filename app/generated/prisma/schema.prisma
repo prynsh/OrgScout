@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique // ✅ make name unique
+  description  String
+  topics       String[]
+  technologies String[]
+  years        Year[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Year {
+  id             Int          @id @default(autoincrement())
+  year           String
+  projectsUrl    String?
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId Int
+  projects       Project[]
+}
+
+model Project {
+  id               Int    @id @default(autoincrement())
+  title            String
+  shortDescription String
+  studentName      String
+  projectUrl       String
+  year             Year   @relation(fields: [yearId], references: [id], onDelete: Cascade)
+  yearId           Int
+}
