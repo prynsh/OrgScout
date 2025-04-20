@@ -1,43 +1,55 @@
-'use client'
+"use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
   const router = useRouter();
+
   return (
-    <div className="relative bg-[#050107] text-white flex items-center justify-center">
-      <div className="py-20 space-y-5 relative z30">
+    <div className="relative bg-[#050107] text-white flex items-center justify-center px-4">
+      <div className="py-20 space-y-6 relative z-30 text-center max-w-4xl">
         <div className="w-full flex justify-center">
-          <Image src="/OrgScout.png" alt="Logo" height={300} width={300} />
+          <Image
+            src="/OrgScout.png"
+            alt="OrgScout Logo"
+            width={300}
+            height={300}
+            sizes="(max-width: 375px) 80vw, 300px"
+            className="w-[300px] max-w-[80vw] h-auto"
+          />
         </div>
 
-        <div className="w-full flex justify-center text-center text-6xl font-extrabold">
+        <h1 className="xl:text-6xl lg:text-4xl  sm:text-6xl font-extrabold leading-tight">
           Level Up Through <br /> Real Code
-        </div>
+        </h1>
 
-        <div className="w-full flex justify-center">
-          <p className="text-center text-xl font-semibold text-neutral-500">
-            <span className="underline underline-offset-3 inline text-amber-300">
-              Explore
-            </span>{" "}
-            real-world open-source projects.
-            <br />
-            <span className="underline-offset-3 underline inline text-amber-300">
-              Learn
-            </span>{" "}
-            by contributing.{" "}
-            <span className="text-amber-300 underline-offset-3 underline inline">
-              Grow
-            </span>{" "}
-            by understanding.
-          </p>
-        </div>
+        <p className="lg:text-lg sm:text-xl font-semibold text-neutral-500">
+          <span className="underline underline-offset-3 text-amber-300">
+            Explore
+          </span>{" "}
+          real-world open-source projects.
+          <br />
+          <span className="underline underline-offset-3 text-amber-300">
+            Learn
+          </span>{" "}
+          by contributing.{" "}
+          <span className="text-amber-300 underline underline-offset-3">
+            Grow
+          </span>{" "}
+          by understanding.
+        </p>
+
         <div className="flex justify-center">
-          <button className="border p-2 rounded-xl" onClick={()=>{router.push("/orgs")}}>Get Started</button>
+          <button
+            className="border border-white px-4 py-2 rounded-xl text-sm sm:text-base hover:bg-white hover:text-black transition"
+            onClick={() => router.push("/orgs")}
+          >
+            Get Started
+          </button>
         </div>
       </div>
 
-      <div className="absolute left-4 top-32 flex flex-col items-start gap-12 z-0">
+      <div className="absolute left-4 top-32 flex-col items-start gap-12 z-0 hidden lg:flex">
         <Image
           src="/docker.png"
           alt="Docker"
@@ -60,7 +72,8 @@ export default function HeroSection() {
           className="ml-30"
         />
       </div>
-      <div className="absolute right-4 top-44 flex flex-col items-end gap-12 z-0">
+
+      <div className="absolute right-4 top-44 flex-col items-end gap-12 z-0 hidden lg:flex">
         <Image
           src="/tailwind.png"
           alt="Tailwind"

@@ -1,34 +1,28 @@
-// import Link from "next/link";
-
-// export default function NavBar() {
-//   return (
-//     <div className=" p-5 font-semibold">
-//       <div className="flex justify-between">
-//         <Link href="/" className=" text-3xl">OrgScout</Link>
-//         <div className="space-x-5 text-xl ">
-//           <Link href="/starred" className="hover:underline underline-offset-4" >Starred</Link>
-//           <Link href="/orgs"  className="hover:underline underline-offset-4">All Orgs</Link>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <div className="w-full flex justify-center bg-[#050107] text-[#e3c7b6]">
-      <div className="w-2/3 p-5 font-semibold">
-        <div className="flex justify-between">
-          <Link href="/" className="text-3xl">OrgScout</Link>
-          <div className="space-x-5 text-xl">
-            <Link href="/starred" className="hover:underline underline-offset-4">Starred</Link>
-            <Link href="/orgs" className="hover:underline underline-offset-4">All Orgs</Link>
-          </div>
+    <nav className="w-full bg-[#050107] text-[#e3c7b6] px-4 py-5 border-b">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between items-center gap-4 sm:gap-0">
+        <Link href="/" className="text-3xl font-semibold">
+          OrgScout
+        </Link>
+
+        <div className="flex gap-6 text-lg sm:text-xl font-medium">
+          <Link
+            href="/starred"
+            className="hover:underline underline-offset-4 transition"
+          >
+            Starred
+          </Link>
+          <Link
+            href="/orgs"
+            className="hover:underline underline-offset-4 transition"
+          >
+            All Orgs
+          </Link>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
