@@ -1,6 +1,9 @@
+'use client'
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+  const router = useRouter();
   return (
     <div className="relative bg-[#050107] text-white flex items-center justify-center">
       <div className="py-20 space-y-5 relative z30">
@@ -30,7 +33,7 @@ export default function HeroSection() {
           </p>
         </div>
         <div className="flex justify-center">
-          <button className="border p-2 rounded-xl">Get Started</button>
+          <button className="border p-2 rounded-xl" onClick={()=>{router.push("/orgs")}}>Get Started</button>
         </div>
       </div>
 

@@ -49,48 +49,113 @@ export async function POST() {
 }
 
 
+// export async function GET(req: Request) {
+//     const { searchParams } = new URL(req.url);
+//     const page = parseInt(searchParams.get('page') || '1');
+//     const yearFilter = searchParams.get('year');
+//     const techFilter = searchParams.get('technology');
+  
+//     const PAGE_SIZE = 12;
+  
+//     const filters: any = {};
+  
+//     if (techFilter) {
+//       filters.technologies = { has: techFilter };
+//     }
+  
+//     if (yearFilter) {
+//       filters.years = {
+//         some: {
+//           year: yearFilter,
+//         },
+//       };
+//     }
+  
+//     try {
+//       const organizations = await prisma.organization.findMany({
+//         where: filters,
+//         include: {
+//           years: {
+//             include: {
+//               projects: true,
+//             },
+//           },
+//         },
+//         skip: (page - 1) * PAGE_SIZE,
+//         take: PAGE_SIZE,
+//         orderBy: { name: 'asc' },
+//       });
+  
+//       const total = await prisma.organization.count({ where: filters });
+  
+//       return NextResponse.json({ organizations, total });
+//     } catch (error) {
+//       console.error('Error fetching organizations:', error);
+//       return NextResponse.json({ error: 'Failed to fetch organizations.' }, { status: 500 });
+//     }
+//   }
+
+
 export async function GET(req: Request) {
-    const { searchParams } = new URL(req.url);
-    const page = parseInt(searchParams.get('page') || '1');
-    const yearFilter = searchParams.get('year');
-    const techFilter = searchParams.get('technology');
-  
-    const PAGE_SIZE = 12;
-  
-    const filters: any = {};
-  
-    if (techFilter) {
-      filters.technologies = { has: techFilter };
-    }
-  
-    if (yearFilter) {
-      filters.years = {
-        some: {
-          year: yearFilter,
+  const { searchParams } = new URL(req.url);
+  const page = parseInt(searchParams.get('page') || '1');
+  const yearFilter = searchParams.get('year');
+  const techFilter = searchParams.get('technology');
+  const search = searchParams.get('search')?.trim();
+
+  const PAGE_SIZE = 12;
+
+  const filters: any = {};
+
+  if (techFilter) {
+    filters.technologies = { has: techFilter };
+  }
+
+  if (yearFilter) {
+    filters.years = {
+      some: {
+        year: yearFilter,
+      },
+    };
+  }
+
+  if (search) {
+    filters.OR = [
+      {
+        name: {
+          contains: search,
+          mode: 'insensitive',
         },
-      };
-    }
-  
-    try {
-      const organizations = await prisma.organization.findMany({
-        where: filters,
-        include: {
-          years: {
-            include: {
-              projects: true,
-            },
+      },
+      {
+        description: {
+          contains: search,
+          mode: 'insensitive',
+        },
+      },
+    ];
+  }
+
+  try {
+    const organizations = await prisma.organization.findMany({
+      where: filters,
+      include: {
+        years: {
+          include: {
+            projects: true,
           },
         },
-        skip: (page - 1) * PAGE_SIZE,
-        take: PAGE_SIZE,
-        orderBy: { name: 'asc' },
-      });
-  
-      const total = await prisma.organization.count({ where: filters });
-  
-      return NextResponse.json({ organizations, total });
-    } catch (error) {
-      console.error('Error fetching organizations:', error);
-      return NextResponse.json({ error: 'Failed to fetch organizations.' }, { status: 500 });
-    }
+      },
+      skip: (page - 1) * PAGE_SIZE,
+      take: PAGE_SIZE,
+      orderBy: { name: 'asc' },
+    });
+
+    const total = await prisma.organization.count({ where: filters });
+
+    return NextResponse.json({ organizations, total });
+  } catch (error) {
+    console.error('Error fetching organizations:', error);
+    return NextResponse.json({ error: 'Failed to fetch organizations.' }, { status: 500 });
   }
+}

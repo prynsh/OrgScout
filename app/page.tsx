@@ -5,7 +5,7 @@ export default function Home() {
     <div className=" w-full min-h-screen bg-[#050107] text-[#e3c7b6] relative overflow-hidden">
       <div className="flex justify-center">
         <div className="w-2/3">
-          <NavBar />
+          {/* <NavBar /> */}
         </div>
       </div>
       <div className="">
