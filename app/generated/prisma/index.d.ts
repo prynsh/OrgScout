@@ -1136,6 +1136,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     description: string | null
+    url: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1144,6 +1145,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     description: string | null
+    url: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1154,6 +1156,7 @@ export namespace Prisma {
     description: number
     topics: number
     technologies: number
+    url: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1172,6 +1175,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    url?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1180,6 +1184,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    url?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1190,6 +1195,7 @@ export namespace Prisma {
     description?: true
     topics?: true
     technologies?: true
+    url?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1287,6 +1293,7 @@ export namespace Prisma {
     description: string
     topics: string[]
     technologies: string[]
+    url: string
     createdAt: Date
     updatedAt: Date
     _count: OrganizationCountAggregateOutputType | null
@@ -1316,6 +1323,7 @@ export namespace Prisma {
     description?: boolean
     topics?: boolean
     technologies?: boolean
+    url?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     years?: boolean | Organization$yearsArgs<ExtArgs>
@@ -1328,6 +1336,7 @@ export namespace Prisma {
     description?: boolean
     topics?: boolean
     technologies?: boolean
+    url?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["organization"]>
@@ -1338,6 +1347,7 @@ export namespace Prisma {
     description?: boolean
     topics?: boolean
     technologies?: boolean
+    url?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["organization"]>
@@ -1348,11 +1358,12 @@ export namespace Prisma {
     description?: boolean
     topics?: boolean
     technologies?: boolean
+    url?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "topics" | "technologies" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
+  export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "topics" | "technologies" | "url" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
   export type OrganizationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     years?: boolean | Organization$yearsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
@@ -1371,6 +1382,7 @@ export namespace Prisma {
       description: string
       topics: string[]
       technologies: string[]
+      url: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["organization"]>
@@ -1802,6 +1814,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Organization", 'String'>
     readonly topics: FieldRef<"Organization", 'String[]'>
     readonly technologies: FieldRef<"Organization", 'String[]'>
+    readonly url: FieldRef<"Organization", 'String'>
     readonly createdAt: FieldRef<"Organization", 'DateTime'>
     readonly updatedAt: FieldRef<"Organization", 'DateTime'>
   }
@@ -4476,6 +4489,7 @@ export namespace Prisma {
     description: 'description',
     topics: 'topics',
     technologies: 'technologies',
+    url: 'url',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4602,6 +4616,7 @@ export namespace Prisma {
     description?: StringFilter<"Organization"> | string
     topics?: StringNullableListFilter<"Organization">
     technologies?: StringNullableListFilter<"Organization">
+    url?: StringFilter<"Organization"> | string
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     updatedAt?: DateTimeFilter<"Organization"> | Date | string
     years?: YearListRelationFilter
@@ -4613,6 +4628,7 @@ export namespace Prisma {
     description?: SortOrder
     topics?: SortOrder
     technologies?: SortOrder
+    url?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     years?: YearOrderByRelationAggregateInput
@@ -4627,6 +4643,7 @@ export namespace Prisma {
     description?: StringFilter<"Organization"> | string
     topics?: StringNullableListFilter<"Organization">
     technologies?: StringNullableListFilter<"Organization">
+    url?: StringFilter<"Organization"> | string
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     updatedAt?: DateTimeFilter<"Organization"> | Date | string
     years?: YearListRelationFilter
@@ -4638,6 +4655,7 @@ export namespace Prisma {
     description?: SortOrder
     topics?: SortOrder
     technologies?: SortOrder
+    url?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: OrganizationCountOrderByAggregateInput
@@ -4656,6 +4674,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Organization"> | string
     topics?: StringNullableListFilter<"Organization">
     technologies?: StringNullableListFilter<"Organization">
+    url?: StringWithAggregatesFilter<"Organization"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
   }
@@ -4782,6 +4801,7 @@ export namespace Prisma {
     description: string
     topics?: OrganizationCreatetopicsInput | string[]
     technologies?: OrganizationCreatetechnologiesInput | string[]
+    url: string
     createdAt?: Date | string
     updatedAt?: Date | string
     years?: YearCreateNestedManyWithoutOrganizationInput
@@ -4793,6 +4813,7 @@ export namespace Prisma {
     description: string
     topics?: OrganizationCreatetopicsInput | string[]
     technologies?: OrganizationCreatetechnologiesInput | string[]
+    url: string
     createdAt?: Date | string
     updatedAt?: Date | string
     years?: YearUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4803,6 +4824,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     topics?: OrganizationUpdatetopicsInput | string[]
     technologies?: OrganizationUpdatetechnologiesInput | string[]
+    url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     years?: YearUpdateManyWithoutOrganizationNestedInput
@@ -4814,6 +4836,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     topics?: OrganizationUpdatetopicsInput | string[]
     technologies?: OrganizationUpdatetechnologiesInput | string[]
+    url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     years?: YearUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4825,6 +4848,7 @@ export namespace Prisma {
     description: string
     topics?: OrganizationCreatetopicsInput | string[]
     technologies?: OrganizationCreatetechnologiesInput | string[]
+    url: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4834,6 +4858,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     topics?: OrganizationUpdatetopicsInput | string[]
     technologies?: OrganizationUpdatetechnologiesInput | string[]
+    url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4844,6 +4869,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     topics?: OrganizationUpdatetopicsInput | string[]
     technologies?: OrganizationUpdatetechnologiesInput | string[]
+    url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5017,6 +5043,7 @@ export namespace Prisma {
     description?: SortOrder
     topics?: SortOrder
     technologies?: SortOrder
+    url?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5029,6 +5056,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    url?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5037,6 +5065,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    url?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5559,6 +5588,7 @@ export namespace Prisma {
     description: string
     topics?: OrganizationCreatetopicsInput | string[]
     technologies?: OrganizationCreatetechnologiesInput | string[]
+    url: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5569,6 +5599,7 @@ export namespace Prisma {
     description: string
     topics?: OrganizationCreatetopicsInput | string[]
     technologies?: OrganizationCreatetechnologiesInput | string[]
+    url: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5619,6 +5650,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     topics?: OrganizationUpdatetopicsInput | string[]
     technologies?: OrganizationUpdatetechnologiesInput | string[]
+    url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5629,6 +5661,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     topics?: OrganizationUpdatetopicsInput | string[]
     technologies?: OrganizationUpdatetechnologiesInput | string[]
+    url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

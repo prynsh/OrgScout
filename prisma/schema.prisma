@@ -21,6 +21,7 @@ model Organization {
   description   String
   topics        String[]
   technologies  String[]
+  url           String
   years         Year[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt

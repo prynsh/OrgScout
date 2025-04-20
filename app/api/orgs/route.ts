@@ -13,12 +13,14 @@ export async function POST() {
                     description: org.description,
                     topics: org.topics,
                     technologies: org.technologies,
+                    url: org.url || null
                 },
                 create: {
                     name: org.name,
                     description: org.description,
                     topics: org.topics,
                     technologies: org.technologies,
+                    url:org.url,
                     years: {
                         create: Object.entries(org.years).map(([yearKey, yearVal]: any) => ({
                             year: yearKey,
@@ -45,26 +47,6 @@ export async function POST() {
         return NextResponse.json({ error: 'Failed to sync organizations.' }, { status: 500 });
     }
 }
-
-
-// export async function GET() {
-//     try {
-//         const organizations = await prisma.organization.findMany({
-//             include: {
-//                 years: {
-//                     include: {
-//                         projects: true,
-//                     },
-//                 },
-//             },
-//         });
-
-//         return NextResponse.json(organizations);
-//     } catch (error) {
-//         console.error('Error fetching organizations:', error);
-//         return NextResponse.json({ error: 'Failed to fetch organizations.' }, { status: 500 });
-//     }
-// }
 
 
 export async function GET(req: Request) {
