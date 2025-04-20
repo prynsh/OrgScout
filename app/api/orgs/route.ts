@@ -7,11 +7,9 @@ export async function POST() {
         const orgs: any[] = await res.json();
 
         for (const org of orgs) {
-            // Try to upsert the org by name, only creating years/projects if it's new
             await prisma.organization.upsert({
                 where: { name: org.name },
                 update: {
-                    // Skip nested years/projects update to avoid redundant work
                     description: org.description,
                     topics: org.topics,
                     technologies: org.technologies,
@@ -49,21 +47,68 @@ export async function POST() {
 }
 
 
-export async function GET() {
-    try {
-        const organizations = await prisma.organization.findMany({
-            include: {
-                years: {
-                    include: {
-                        projects: true,
-                    },
-                },
-            },
-        });
+// export async function GET() {
+//     try {
+//         const organizations = await prisma.organization.findMany({
+//             include: {
+//                 years: {
+//                     include: {
+//                         projects: true,
+//                     },
+//                 },
+//             },
+//         });
 
-        return NextResponse.json(organizations);
-    } catch (error) {
-        console.error('Error fetching organizations:', error);
-        return NextResponse.json({ error: 'Failed to fetch organizations.' }, { status: 500 });
+//         return NextResponse.json(organizations);
+//     } catch (error) {
+//         console.error('Error fetching organizations:', error);
+//         return NextResponse.json({ error: 'Failed to fetch organizations.' }, { status: 500 });
+//     }
+// }
+
+
+export async function GET(req: Request) {
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get('page') || '1');
+    const yearFilter = searchParams.get('year');
+    const techFilter = searchParams.get('technology');
+  
+    const PAGE_SIZE = 12;
+  
+    const filters: any = {};
+  
+    if (techFilter) {
+      filters.technologies = { has: techFilter };
     }
-}
+  
+    if (yearFilter) {
+      filters.years = {
+        some: {
+          year: yearFilter,
+        },
+      };
+    }
+  
+    try {
+      const organizations = await prisma.organization.findMany({
+        where: filters,
+        include: {
+          years: {
+            include: {
+              projects: true,
+            },
+          },
+        },
+        skip: (page - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
+        orderBy: { name: 'asc' },
+      });
+  
+      const total = await prisma.organization.count({ where: filters });
+  
+      return NextResponse.json({ organizations, total });
+    } catch (error) {
+      console.error('Error fetching organizations:', error);
+      return NextResponse.json({ error: 'Failed to fetch organizations.' }, { status: 500 });
+    }
+  }

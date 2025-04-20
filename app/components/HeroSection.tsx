@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <div className="relative bg-black text-white flex items-center justify-center">
+    <div className="relative bg-[#050107] text-white flex items-center justify-center">
       <div className="py-20 space-y-5 relative z30">
         <div className="w-full flex justify-center">
           <Image src="/OrgScout.png" alt="Logo" height={300} width={300} />
