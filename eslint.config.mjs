@@ -23,7 +23,7 @@ const eslintConfig = [
       '**/dist/**',
       '**/build/**',
       '**/public/**',
-      // Add any other files or directories you want to ignore
+      '.eslintrc.js',
     ],
   },
 ];

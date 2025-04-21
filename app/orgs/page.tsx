@@ -5,10 +5,11 @@ import axios from "axios";
 import { OrgCard } from "../components/OrgCard";
 import Pagination from "../components/Pagination";
 import { Organization } from "../types/types";
+import Loader from "../components/Loader";
 
 const START_YEAR = 2016;
 const CURRENT_YEAR = new Date().getFullYear();
-const DEBOUNCE_DELAY = 300; // 300ms debounce delay
+const DEBOUNCE_DELAY = 500; 
 
 export default function Organizations() {
   const [orgs, setOrgs] = useState<Organization[]>([]);
@@ -18,12 +19,18 @@ export default function Organizations() {
   const [technologies, setTechnologies] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchOrgs = async () => {
-    const res = await axios.get("/api/orgs", {
-      params: { page, year, technology, search: debouncedSearch },
-    });
-    setOrgs(res.data.organizations);
+    try {
+      setLoading(true);
+      const res = await axios.get("/api/orgs", {
+        params: { page, year, technology, search: debouncedSearch },
+      });
+      setOrgs(res.data.organizations);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchTechnologies = async () => {
@@ -102,17 +109,24 @@ export default function Organizations() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-screen">
-        {orgs.map((org) => (
-          <OrgCard
-            key={org.id || org.name}
-            org={{
-              ...org,
-              url: org.url || "#",
-            }}
-          />
-        ))}
+        {loading ? (
+          <div className="col-span-full flex justify-center items-center min-h-[300px]">
+            <Loader />
+          </div>
+        ) : (
+          orgs.map((org) => (
+            <OrgCard
+              key={org.id || org.name}
+              org={{
+                ...org,
+                url: org.url || "#",
+              }}
+            />
+          ))
+        )}
       </div>
-      <Pagination page={page} setPage={setPage} />
+
+      {!loading && <Pagination page={page} setPage={setPage} />}
     </div>
   );
 }

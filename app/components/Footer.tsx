@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, TwitchIcon, TwitterIcon } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -31,6 +31,15 @@ const Footer = () => {
             aria-label="LinkedIn"
           >
             <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
+          </a>
+          <a
+            href="https://x.com/prynsshh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-teal-400 transition-colors"
+            aria-label="LinkedIn"
+          >
+            <TwitterIcon className="w-5 h-5 sm:w-6 sm:h-6" />
           </a>
         </div>
       </div>
