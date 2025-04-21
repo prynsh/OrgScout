@@ -5,7 +5,7 @@ export default function Home() {
       <div className="flex justify-center">
         <div className="w-2/3">{/* <NavBar /> */}</div>
       </div>
-      <div className="">
+      <div>
         <HeroSection />
       </div>
     </div>

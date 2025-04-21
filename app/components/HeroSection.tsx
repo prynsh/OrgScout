@@ -19,7 +19,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <h1 className="xl:text-6xl lg:text-4xl  sm:text-6xl font-extrabold leading-tight">
+        <h1 className="xl:text-6xl lg:text-4xl  text-4xl sm:text-6xl font-extrabold leading-tight">
           Level Up Through <br /> Real Code
         </h1>
 
@@ -41,10 +41,14 @@ export default function HeroSection() {
 
         <div className="flex justify-center">
           <button
-            className="border border-white px-4 py-2 rounded-xl text-sm sm:text-base hover:bg-white hover:text-black transition"
+            className="relative h-12 w-40 overflow-hidden border border-black bg-white px-4 py-2 text-sm sm:text-base rounded-full text-black shadow-2xl transition-all 
+            before:absolute before:left-0 before:-ml-2 before:h-48 before:w-48 before:origin-top-right before:-translate-x-full before:translate-y-12 
+            before:-rotate-90 before:bg-yellow-400 before:transition-all before:duration-300 before:z-0
+            hover:text-white hover:shadow-yellow-500 hover:before:-rotate-180"
             onClick={() => router.push("/orgs")}
           >
-            Get Started
+            <span className="relative z-10">Get Started</span>
+            
           </button>
         </div>
       </div>

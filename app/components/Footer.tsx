@@ -5,7 +5,7 @@ import { Github, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="w-full px-4 py-6 border-t border-gray-700 bg-black text-white transition-all">
+    <footer className="w-screen px-4 py-6 overflow-x-hidden border-t border-gray-700 bg-black text-white transition-all">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
         {/* Text */}
         <p className="text-center sm:text-left">

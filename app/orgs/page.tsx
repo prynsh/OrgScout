@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { OrgCard } from "../components/OrgCard";
 import Pagination from "../components/Pagination";
 import { Organization } from "../types/types";
 
-
-
-
 const START_YEAR = 2016;
 const CURRENT_YEAR = new Date().getFullYear();
+const DEBOUNCE_DELAY = 300; // 300ms debounce delay
 
 export default function Organizations() {
   const [orgs, setOrgs] = useState<Organization[]>([]);
@@ -19,10 +17,11 @@ export default function Organizations() {
   const [technology, setTechnology] = useState("");
   const [technologies, setTechnologies] = useState<string[]>([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
   const fetchOrgs = async () => {
     const res = await axios.get("/api/orgs", {
-      params: { page, year, technology, search },
+      params: { page, year, technology, search: debouncedSearch },
     });
     setOrgs(res.data.organizations);
   };
@@ -38,17 +37,25 @@ export default function Organizations() {
   };
 
   useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, DEBOUNCE_DELAY);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [search]);
+
+  useEffect(() => {
     fetchOrgs();
-  }, [page, year, technology, search]);
+  }, [page, year, technology, debouncedSearch]);
 
   useEffect(() => {
     fetchTechnologies();
   }, []);
 
-
   return (
     <div className="p-6 bg-[#050107] text-[#e3c7b6] font-bungee">
-      <div className="flex flex-col sm:flex-row sm:items-center  sm:justify-between gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <input
           className="border p-2 px-4 bg-black text-white w-full sm:w-60 rounded"
           placeholder="Search..."
@@ -59,14 +66,14 @@ export default function Organizations() {
           }}
         />
 
-        <div className="flex flex-col sm:flex-row gap-3  ">
+        <div className="flex flex-col sm:flex-row gap-3">
           <select
             value={year}
             onChange={(e) => {
               setYear(e.target.value);
               setPage(1);
             }}
-            className="p-2 bg-zinc-900 border rounded sm:w-full md:w-fit "
+            className="p-2 bg-zinc-900 border rounded sm:w-full md:w-fit"
           >
             <option value="">All Years</option>
             {Array.from({ length: CURRENT_YEAR - START_YEAR + 1 }, (_, i) => (

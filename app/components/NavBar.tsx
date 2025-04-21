@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <nav className="w-full bg-[#050107] text-[#e3c7b6] px-4 py-5 border-b">
+    <nav className="w-screen bg-[#050107] text-[#e3c7b6] px-4 py-5 border-b">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between items-center gap-4 sm:gap-0">
         <Link href="/" className="text-3xl font-semibold">
           OrgScout
