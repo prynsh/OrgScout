@@ -2,21 +2,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { CiStar } from "react-icons/ci";
 import { TiStarFullOutline } from "react-icons/ti";
+import { Organization } from "../types/types";
 
-interface ProjectYear {
-  year: string;
-}
-
-interface Organization {
-  name: string;
-  description: string;
-  topics: string[];
-  technologies: string[];
-  years: ProjectYear[];
-  imageURL: string;
-  githubURL?: string;
-  url: string;
-}
 
 export const OrgCard: React.FC<{ org: Organization }> = ({ org }) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
@@ -64,10 +51,19 @@ export const OrgCard: React.FC<{ org: Organization }> = ({ org }) => {
         >
           {org.name}
         </Link>
-        <div onClick={handleBookmarks} className='rounded-md cursor-pointer  border-zinc-800 p-1 duration-300'>
-            {isBookmarked ? <TiStarFullOutline size={28} className="hover:scale-125 transition-all" /> : <CiStar size={28} className="hover:scale-125 transition-all" />}
-            
-          </div>
+        <div
+          onClick={handleBookmarks}
+          className="rounded-md cursor-pointer  border-zinc-800 p-1 duration-300"
+        >
+          {isBookmarked ? (
+            <TiStarFullOutline
+              size={28}
+              className="hover:scale-125 transition-all"
+            />
+          ) : (
+            <CiStar size={28} className="hover:scale-125 transition-all" />
+          )}
+        </div>
       </div>
 
       <p className="text-sm text-[#a37f4f] mb-5">{org.description}</p>

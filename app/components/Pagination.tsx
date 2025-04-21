@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
+import { PaginationProps } from "../types/types";
 
-interface PaginationProps {
-  page: number;
-  setPage: (page: number | ((prevPage: number) => number)) => void;
-}
+
 
 export default function Pagination({ page, setPage }: PaginationProps) {
   const totalPages = 41;
@@ -28,8 +26,8 @@ export default function Pagination({ page, setPage }: PaginationProps) {
         onClick={() => setPage(1)}
         className={`w-6 h-6 md:w-8 md:h-8 text-sm md:text-base rounded-md flex items-center justify-center ${
           page === 1
-            ? 'bg-white border-2 border-[#d6b5a0] text-black'
-            : 'bg-[#e3c7b6] text-black border border-[#d6b5a0] hover:bg-[#d6b5a0]'
+            ? "bg-white border-2 border-[#d6b5a0] text-black"
+            : "bg-[#e3c7b6] text-black border border-[#d6b5a0] hover:bg-[#d6b5a0]"
         }`}
       >
         1
@@ -37,7 +35,11 @@ export default function Pagination({ page, setPage }: PaginationProps) {
     );
 
     if (page > 3) {
-      pageNumbers.push(<span key="ellipsis1" className="px-1 md:px-2 flex items-center">...</span>);
+      pageNumbers.push(
+        <span key="ellipsis1" className="px-1 md:px-2 flex items-center">
+          ...
+        </span>
+      );
     }
 
     let startPage = Math.max(2, page - 2);
@@ -58,8 +60,8 @@ export default function Pagination({ page, setPage }: PaginationProps) {
           onClick={() => setPage(i)}
           className={`w-6 h-6 md:w-8 md:h-8 text-sm md:text-base rounded-md flex items-center justify-center ${
             page === i
-              ? 'bg-white border-2 border-[#d6b5a0] text-black'
-              : 'bg-[#e3c7b6] text-black border border-[#d6b5a0] hover:bg-[#d6b5a0]'
+              ? "bg-white border-2 border-[#d6b5a0] text-black"
+              : "bg-[#e3c7b6] text-black border border-[#d6b5a0] hover:bg-[#d6b5a0]"
           }`}
         >
           {i}
@@ -68,7 +70,11 @@ export default function Pagination({ page, setPage }: PaginationProps) {
     }
 
     if (page < totalPages - 3) {
-      pageNumbers.push(<span key="ellipsis2" className="px-1 md:px-2 flex items-center">...</span>);
+      pageNumbers.push(
+        <span key="ellipsis2" className="px-1 md:px-2 flex items-center">
+          ...
+        </span>
+      );
     }
 
     if (totalPages > 1) {
@@ -78,8 +84,8 @@ export default function Pagination({ page, setPage }: PaginationProps) {
           onClick={() => setPage(totalPages)}
           className={`w-6 h-6 md:w-8 md:h-8 text-sm md:text-base rounded-md flex items-center justify-center ${
             page === totalPages
-              ? 'bg-white border-2 border-[#d6b5a0] text-black'
-              : 'bg-[#e3c7b6] text-black border border-[#d6b5a0] hover:bg-[#d6b5a0]'
+              ? "bg-white border-2 border-[#d6b5a0] text-black"
+              : "bg-[#e3c7b6] text-black border border-[#d6b5a0] hover:bg-[#d6b5a0]"
           }`}
         >
           {totalPages}

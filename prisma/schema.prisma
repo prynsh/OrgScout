@@ -17,7 +17,7 @@ datasource db {
 
 model Organization {
   id            Int       @id @default(autoincrement())
-  name          String    @unique  // ✅ make name unique
+  name          String    @unique  
   description   String
   topics        String[]
   technologies  String[]

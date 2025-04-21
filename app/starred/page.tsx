@@ -2,22 +2,8 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { OrgCard } from "../components/OrgCard";
-import NavBar from "../components/NavBar";
+import { Organization } from "../types/types";
 
-interface ProjectYear {
-  year: string;
-}
-
-interface Organization {
-  name: string;
-  description: string;
-  topics: string[];
-  technologies: string[];
-  years: ProjectYear[];
-  imageURL: string;
-  githubURL?: string;
-  url: string;
-}
 
 export default function Starred() {
   const [bookmarkedOrgs, setBookmarkedOrgs] = useState<Organization[]>([]);
@@ -43,7 +29,7 @@ export default function Starred() {
       <h1 className="text-4xl md:text-7xl font-extrabold mb-6">Starred</h1>
 
       {bookmarkedOrgs.length === 0 ? (
-        <p className="text-lg text-gray-400 mt-10"> 
+        <p className="text-lg text-gray-400 mt-10">
           No organizations starred yet.
         </p>
       ) : (
