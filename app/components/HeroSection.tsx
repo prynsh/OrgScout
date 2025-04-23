@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { InteractiveHoverButton } from "./Button";
 
 export default function HeroSection() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function HeroSection() {
         </p>
 
         <div className="flex justify-center">
-          <button
+          {/* <button
             className="relative h-12 w-40 overflow-hidden border border-black bg-white px-4 py-2 text-sm sm:text-base rounded-full text-black shadow-2xl transition-all 
             before:absolute before:left-0 before:-ml-2 before:h-48 before:w-48 before:origin-top-right before:-translate-x-full before:translate-y-12 
             before:-rotate-90 before:bg-yellow-400 before:transition-all before:duration-300 before:z-0
@@ -49,7 +50,8 @@ export default function HeroSection() {
           >
             <span className="relative z-10">Get Started</span>
             
-          </button>
+          </button> */}
+          <InteractiveHoverButton />
         </div>
       </div>
 
